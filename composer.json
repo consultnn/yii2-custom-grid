@@ -1,0 +1,20 @@
+{
+    "name": "consultnn/yii2-custom-grid",
+    "description": "Yii2 GridView with plugin support",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "sokrat",
+            "email": "sergey.sipatov@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "bower-asset/jquery-resizable-columns": "~0.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "consultnn\\grid\\": "."
+        }
+    }
+}
