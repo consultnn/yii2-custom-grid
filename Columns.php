@@ -5,15 +5,17 @@ namespace consultnn\grid;
 use yii\base\Object;
 use yii\base\UnknownPropertyException;
 use yii\helpers\Html;
-use yii\base\Model;
 
 class Columns extends Object
 {
     public $config = [];
 
+    /**
+     * @var \yii\base\Model
+     */
     public $model;
 
-    public static function editable()
+    public function editable()
     {
         return [
 
@@ -33,7 +35,7 @@ class Columns extends Object
      * @return array
      * @throws \Exception
      */
-    public static function all()
+    public function all()
     {
         return array_merge(
             self::view(),
@@ -50,10 +52,10 @@ class Columns extends Object
         return ;
     }
 
-    public static function active(Model $model)
+    public function active()
     {
         $ids = [];
-        foreach (self::view($model) as $column) {
+        foreach (self::view() as $column) {
             if (!isset($column['visible']) || (isset($column['visible']) && $column['visible'])) {
                 $ids[] = self::getId($column);
             }
@@ -66,16 +68,16 @@ class Columns extends Object
         return [];
     }
 
-    public static function labels(Model $model)
+    public function labels()
     {
         $labels = [];
-        foreach (self::view($model) as $column) {
-            $labels[self::getId($column)] = self::getLabel($model, $column);
+        foreach (self::view() as $column) {
+            $labels[self::getId($column)] = self::getLabel($this->model, $column);
         }
         return $labels;
     }
 
-    private static function getId($column)
+    private function getId($column)
     {
         if (is_string($column)) {
             $id = $column;
@@ -90,12 +92,12 @@ class Columns extends Object
         return $id;
     }
 
-    private static function getLabel(Model $model, $column)
+    private function getLabel($column)
     {
         if (is_string($column)) {
-            $label = $model->getAttributeLabel($column);
+            $label = $this->model->getAttributeLabel($column);
         } elseif (isset($column['attribute'])) {
-            $label = $model->getAttributeLabel($column['attribute']);
+            $label = $this->model->getAttributeLabel($column['attribute']);
         } elseif (isset($column['label'])) {
             $label = $column['label'];
         } elseif (isset($column['header'])) {
