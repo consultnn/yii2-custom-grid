@@ -49,3 +49,4 @@ $this->registerCss("
         </div>
     </div>
 </div>
+<div class="clearfix"></div>
