@@ -9,6 +9,8 @@ class Settings extends AbstractPlugin
     const DATA_COLUMN_ID = 'column-id';
     const DATA_COLUMN_LABEL = 'column-label';
 
+    public $maxColumnsCount = 7;
+
     public $columnLabels = [];
 
     public $viewPath = 'settings.php';
@@ -87,10 +89,29 @@ class Settings extends AbstractPlugin
     {
         $view = $this->getView();
 
-        $js = "jQuery('#{$this->grid->id} #column-settings-button').on('click', function(event){
-            $('#column-settings').toggle();
+        $js = "$('#{$this->id} #settings-button').on('click', function(event){
+            $('#settings').toggle();
             event.preventDefault();
-        });";
+            setMaxColumns();
+        });
+
+        $('#{$this->id} .close').on('click', function() {
+            $('#settings').toggle()
+        });
+
+        var checkboxSelector = '#{$this->id} .columns-setting input[type = checkbox]';
+        $(checkboxSelector).on('change', function(event){
+            setMaxColumns();
+        })
+
+        function setMaxColumns() {
+            if ($(checkboxSelector+':checked').length >= {$this->maxColumnsCount}) {
+                $(checkboxSelector+':not(:checked)').prop( 'disabled', true );
+            } else {
+                $(checkboxSelector+':not(:checked)').prop( 'disabled', false );
+            }
+        }
+        ";
         $view->registerJs($js);
     }
 

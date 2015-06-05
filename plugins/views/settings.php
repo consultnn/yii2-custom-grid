@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 /** @var \yii\web\View $this */
+/** @var \consultnn\grid\plugins\Settings $widget */
 $this->registerCss("
     .summary {
         float:left;
@@ -9,43 +10,52 @@ $this->registerCss("
         float: right;
     }
 
-    #column-settings-button {
+    #settings-button {
         font-size: 24px;
         margin-bottom: 5px;
         color: black;
         cursor: pointer;
     }
 
-    #column-settings {
-        right: 0;
-        position: absolute;
+    #settings {
+        position: fixed;
         display: none;
         background-color: #fff;
         z-index: 1;
-        width: 250px;
+        top: 50%;
+        left: 50%;
+        margin-top: -250px;
+        margin-left: -225px;
+        width: 450px;
     }
 
-    #column-settings label {
-        width: 100%;
+    #settings label {
+        width: 50%;
+        float:left;
     }
 ");
 ?>
 <div class="settings-container">
-    <span id="column-settings-button" class="glyphicon glyphicon-menu-hamburger" ></span>
-    <div class="panel panel-default" id="column-settings">
+    <span id="settings-button" class="glyphicon glyphicon-menu-hamburger" ></span>
+    <div class="panel panel-default" id="settings">
         <div class="panel-heading">
-            Settings:
+            Настройки:
+            <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="panel-body">
-            <?php
-
-            /** @var \consultnn\grid\plugins\Settings $widget */
-            echo Html::beginForm($widget->url);
-            echo Html::hiddenInput('table_id', $widget->id);
-            echo Html::checkboxList("columns", $widget->activeColumns, $widget->columnLabels);
-            echo Html::submitButton('Save', ['class' => 'btn btn-primary', 'id' => 'save-columns']);
-            echo Html::endForm();
-            ?>
+            <div class="columns-setting">
+                <div class="alert alert-warning" role="alert">
+                    Можно выбрать не более <?= $widget->maxColumnsCount ?> колонок
+                </div>
+                <?php
+                /** @var \consultnn\grid\plugins\Settings $widget */
+                echo Html::beginForm($widget->url);
+                echo Html::hiddenInput('table_id', $widget->id);
+                echo Html::checkboxList("columns", $widget->activeColumns, $widget->columnLabels);
+                echo Html::submitButton('Сохранить', ['class' => 'btn btn-primary pull-right', 'id' => 'save-columns']);
+                echo Html::endForm();
+                ?>
+            </div>
         </div>
     </div>
 </div>
