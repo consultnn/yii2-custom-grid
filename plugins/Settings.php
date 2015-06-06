@@ -17,21 +17,36 @@ class Settings extends AbstractPlugin
 
     public $url;
 
-    public $settings;
+    public $storage;
 
     public $activeColumns = [];
+
+    public $storageId;
 
 
     public function init()
     {
-        $this->grid->pluginSections['{settings}'] = $this;
-
-        if (isset($this->settings['columns'])) {
-            $this->activeColumns = $this->settings['columns'];
+        if (empty($this->storageId)) {
+            $this->storageId = $this->id.'-settings';
         }
 
+        $this->grid->pluginSections['{settings}'] = $this;
+
+        $this->initFromStorage();
         parent::init();
     }
+
+    protected function initFromStorage()
+    {
+        if ($this->storage->has($this->storageId)) {
+            $settings = $this->storage->get($this->storageId);
+            if (isset($settings['columns'])) {
+                $this->activeColumns = $settings['columns'];
+            }
+        }
+    }
+
+
 
     public function initColumns()
     {
@@ -66,15 +81,11 @@ class Settings extends AbstractPlugin
                 if (!empty($id) && !empty($label)) {
                     $this->columnLabels[$id] = $label;
 
-                    if (!empty($this->activeColumns) && !in_array($id, $this->activeColumns)) {
+                    if (!in_array($id, $this->activeColumns)) {
                         unset($this->grid->columns[$key]);
                     }
                 }
             }
-        }
-
-        if (empty($this->activeColumns)) {
-            $this->activeColumns = array_keys($this->columnLabels);
         }
     }
 

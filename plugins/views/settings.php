@@ -50,8 +50,8 @@ $this->registerCss("
                 <?php
                 /** @var \consultnn\grid\plugins\Settings $widget */
                 echo Html::beginForm($widget->url);
-                echo Html::hiddenInput('table_id', $widget->id);
-                echo Html::checkboxList("columns", $widget->activeColumns, $widget->columnLabels);
+                echo Html::hiddenInput('storage_id', $widget->storageId);
+                echo Html::checkboxList("settings[columns]", $widget->activeColumns, $widget->columnLabels);
                 echo Html::submitButton('Сохранить', ['class' => 'btn btn-primary pull-right', 'id' => 'save-columns']);
                 echo Html::endForm();
                 ?>
