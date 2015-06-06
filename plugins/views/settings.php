@@ -21,7 +21,7 @@ $this->registerCss("
         position: fixed;
         display: none;
         background-color: #fff;
-        z-index: 1;
+        z-index: 3;
         top: 50%;
         left: 50%;
         margin-top: -250px;
