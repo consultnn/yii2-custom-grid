@@ -22,8 +22,8 @@ and dependence
 
 to the require section of your `composer.json` file.
 ## Existing plug-ins
-* [Settings](docs/resizable-columns.md)
-* [ResizableColumns](docs/settings.md)
+* [Settings](docs/plugins/resizable-columns.md)
+* [ResizableColumns](docs/plugins/settings.md)
 
 ## Configuration
 1) Add grid view in your view with plugins parameter
