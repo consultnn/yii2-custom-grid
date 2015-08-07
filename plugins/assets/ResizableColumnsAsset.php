@@ -11,10 +11,12 @@ class ResizableColumnsAsset extends AssetBundle
     public $useLocalStorage = false;
 
     public $js = [
-        '/jquery-resizable-columns/dist/jquery.resizableColumns.js',
+        'jquery-resizable-columns/dist/jquery.resizableColumns.js',
     ];
 
-    public $css = ['/jquery-resizable-columns/dist/jquery.resizableColumns.css'];
+    public $css = [
+        'jquery-resizable-columns/dist/jquery.resizableColumns.css'
+    ];
 
     public $depends = [
         'yii\web\JqueryAsset',
@@ -23,7 +25,7 @@ class ResizableColumnsAsset extends AssetBundle
     public function registerAssetFiles($view)
     {
         if ($this->useLocalStorage) {
-            $this->js[] = '/store-js/store.min.js';
+            $this->js[] = 'store-js/store.min.js';
         }
 
         parent::registerAssetFiles($view);
