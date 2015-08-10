@@ -33,6 +33,7 @@ class Settings extends AbstractPlugin
         $this->grid->pluginSections['{settings}'] = $this;
 
         $this->initFromStorage();
+
         parent::init();
     }
 
@@ -45,8 +46,6 @@ class Settings extends AbstractPlugin
             }
         }
     }
-
-
 
     public function initColumns()
     {
@@ -123,6 +122,7 @@ class Settings extends AbstractPlugin
             }
         }
         ";
+
         $view->registerJs($js);
     }
 
