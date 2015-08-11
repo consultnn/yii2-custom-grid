@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 /** @var \yii\web\View $this */
 /** @var \consultnn\grid\plugins\Settings $widget */
+// TODO move css in file
 $this->registerCss("
     .summary {
         float:left;

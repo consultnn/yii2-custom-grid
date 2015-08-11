@@ -1,10 +1,8 @@
 <?php
 namespace consultnn\grid\plugins;
 
-
 interface SettingsStorageInterface
 {
-
     /**
      * Check settings is set
      * @param $name

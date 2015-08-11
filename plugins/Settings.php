@@ -9,21 +9,41 @@ class Settings extends AbstractPlugin
     const DATA_COLUMN_ID = 'column-id';
     const DATA_COLUMN_LABEL = 'column-label';
 
+    /**
+     * @var int
+     */
     public $maxColumnsCount = 7;
 
+    /**
+     * @var string[]
+     */
     public $columnLabels = [];
 
+    /**
+     * @var string
+     */
     public $viewPath = 'settings.php';
 
     public $url;
 
+    /**
+     * @var SettingsStorageInterface
+     */
     public $storage;
 
+    /**
+     * @var string[]
+     */
     public $activeColumns = [];
 
+    /**
+     * @var string
+     */
     public $storageId;
 
-
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         if (empty($this->storageId)) {
@@ -88,10 +108,14 @@ class Settings extends AbstractPlugin
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     public function run()
     {
         $this->initColumns();
         $this->registerClientScript();
+
         return $this->render($this->viewPath, ['widget' => $this]);
     }
 
