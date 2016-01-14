@@ -7,14 +7,7 @@ Plugin system for Yii2 GridView
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-Add repository
-```
-{
-  "type": "vcs",
-  "url":  "https://github.com/consultnn/yii2-custom-grid.git"
-},
-```
-and dependence
+Add dependence
 
 ```
 "consultnn/yii2-custom-grid": "*"
