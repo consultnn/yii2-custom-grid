@@ -4,9 +4,15 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "sokrat",
-            "email": "sergey.sipatov@gmail.com"
-        }
+			"name": "Sergey Sipatov",
+			"email": "sergey.sipatov@gmail.com",
+			"role": "Developer"
+		},
+		{
+			"name": "Maxim Mironyuk",
+			"email": "serieznyi@gmail.com",
+			"role": "Developer"
+		}
     ],
     "minimum-stability": "dev",
     "require": {
@@ -18,5 +24,10 @@
         "psr-4": {
             "consultnn\\grid\\": "."
         }
-    }
+    },
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.0.x-dev"
+		}
+	}
 }
