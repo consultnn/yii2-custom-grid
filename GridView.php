@@ -12,7 +12,7 @@ class GridView extends \yii\grid\GridView
 
     public $pluginSections = [];
 
-    public $layout = '{summary}{settings}\n{items}\n{pager}';
+    public $layout = "{summary}{settings}\n{items}\n{pager}";
     /**
      * @var array|plugins\AbstractPlugin[]
      */
