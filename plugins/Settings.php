@@ -59,7 +59,7 @@ class Settings extends AbstractPlugin
 
     protected function initFromStorage()
     {
-        if ($this->storage->has($this->storageId)) {
+        if ($this->storage && $this->storage->has($this->storageId)) {
             $settings = $this->storage->get($this->storageId);
             if (isset($settings['columns'])) {
                 $this->activeColumns = $settings['columns'];
