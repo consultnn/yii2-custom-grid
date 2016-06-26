@@ -11,6 +11,8 @@ class GridView extends \yii\grid\GridView
     const EVENT_AFTER_RUN = 'afterRun';
 
     public $pluginSections = [];
+
+    public $layout = '{summary}{settings}\n{items}\n{pager}';
     /**
      * @var array|plugins\AbstractPlugin[]
      */
@@ -21,6 +23,7 @@ class GridView extends \yii\grid\GridView
         $this->initPlugins();
 
         parent::init();
+
         $this->trigger(self::EVENT_AFTER_INIT);
     }
 
