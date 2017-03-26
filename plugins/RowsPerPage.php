@@ -78,7 +78,7 @@ class RowsPerPage extends AbstractPlugin
 
     protected function initRowsPerPage()
     {
-        $settings = \Yii::$app->user->getSettingsStorage()->get('company-rows-per-page');
+        $settings = $this->storage->get($this->storageId);
         $pagination = $this->grid->dataProvider->getPagination();
         $pagination->setPageSize($settings['rows-per-page']);
     }
