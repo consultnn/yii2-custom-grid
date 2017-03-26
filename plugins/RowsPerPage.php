@@ -15,7 +15,7 @@ class RowsPerPage extends AbstractPlugin
      *
      * @var array $numberRows
      */
-    public $numberRows;
+    public $numberRows = [20, 50, 100];
 
     /**
      * Url path for save selected count of rows
