@@ -3,6 +3,8 @@
 namespace consultnn\grid\plugins;
 
 use consultnn\grid\GridView;
+use yii\base\Exception;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class RowsPerPage
@@ -10,6 +12,8 @@ use consultnn\grid\GridView;
  */
 class RowsPerPage extends AbstractPlugin
 {
+    public $viewPath = 'rows_per_page.php';
+
     /**
      * Available number rows for select
      *
@@ -29,29 +33,29 @@ class RowsPerPage extends AbstractPlugin
     public $storage;
 
     /**
+     * Storage key for save plugin settings
+     *
      * @var string
      */
     public $storageId;
 
     /**
      * {@inheritdoc}
+     * @throws Exception
      */
     public function init()
     {
-        if (!$this->viewPath) {
-            $this->viewPath = 'rows_per_page.php';
+        if (!$this->storageId) {
+            $this->storageId = $this->id . '-rows-per-page';
         }
 
-        if (empty($this->storageId)) {
-            $this->storageId = $this->id . '-rows-per-page';
+        if (!$this->storage) {
+            throw new Exception('Storage not initialized');
         }
 
         $this->grid->pluginSections['{rows_per_page}'] = $this;
 
-        foreach ($this->numberRows as $key => $number) {
-            $this->numberRows[$number] = $number;
-            unset($this->numberRows[$key]);
-        }
+        $this->numberRows = array_combine($this->numberRows, $this->numberRows);
 
         $this->grid->on(GridView::EVENT_AFTER_INIT, [$this, 'initRowsPerPage']);
 
@@ -91,7 +95,9 @@ class RowsPerPage extends AbstractPlugin
 
     public function getRowsPerPage()
     {
-        $settings = $this->storage->get($this->storageId);
-        return $settings['rows-per-page'];
+        return ArrayHelper::getValue(
+            $this->storage->get($this->storageId),
+            'rows-per-page'
+        );
     }
 }
