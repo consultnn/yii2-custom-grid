@@ -1,34 +1,47 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: a.talanin
- * Date: 01.12.15
- * Time: 8:52
- */
 
 namespace consultnn\grid\plugins;
 
 use consultnn\grid\GridView;
 
+/**
+ * Class RowsPerPage
+ * @package consultnn\grid\plugins
+ */
 class RowsPerPage extends AbstractPlugin
 {
-    /** @var array $numberRows */
+    /**
+     * Available number rows for select
+     *
+     * @var array $numberRows
+     */
     public $numberRows;
 
-    /** @var string $viewPath */
-    public $viewPath = 'rows_per_page.php';
-
-    /** @var string $url */
+    /**
+     * Url path for save selected count of rows
+     * @var string $url
+     */
     public $url;
 
-    /** @var SettingsStorageInterface $storage */
+    /**
+     * @var SettingsStorageInterface $storage
+     */
     public $storage;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $storageId;
 
+    /**
+     * {@inheritdoc}
+     */
     public function init()
     {
+        if (!$this->viewPath) {
+            $this->viewPath = 'rows_per_page.php';
+        }
+
         if (empty($this->storageId)) {
             $this->storageId = $this->id . '-rows-per-page';
         }
@@ -41,12 +54,18 @@ class RowsPerPage extends AbstractPlugin
         }
 
         $this->grid->on(GridView::EVENT_AFTER_INIT, [$this, 'initRowsPerPage']);
+
         parent::init();
     }
 
+    /**
+     * {@inheritdoc}
+     * @throws \yii\base\InvalidParamException
+     */
     public function run()
     {
         $this->registerClientScript();
+
         return $this->render($this->viewPath, [
             'numberRows' => $this->numberRows,
             'widget' => $this
