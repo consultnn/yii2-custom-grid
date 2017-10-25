@@ -32,14 +32,19 @@ class RowsPerPage extends AbstractPlugin
      * @var string
      */
     public $storageId;
+    
+    /**
+    * View file
+    */
+    public $viewFile = 'rows_per_page';
 
     /**
      * {@inheritdoc}
      */
     public function init()
     {
-        if (!$this->viewPath) {
-            $this->viewPath = 'rows_per_page.php';
+        if (!$this->viewFile) {
+            $this->viewFile = 'rows_per_page.php';
         }
 
         if (empty($this->storageId)) {
@@ -66,7 +71,7 @@ class RowsPerPage extends AbstractPlugin
     {
         $this->registerClientScript();
 
-        return $this->render($this->viewPath, [
+        return $this->render($this->viewFile, [
             'numberRows' => $this->numberRows,
             'widget' => $this
         ]);
