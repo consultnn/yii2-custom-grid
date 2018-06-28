@@ -2,23 +2,24 @@
 use yii\helpers\Html;
 /** @var \yii\web\View $this */
 /** @var \consultnn\grid\plugins\Settings $widget */
-// TODO move css in file
-$this->registerCss("
-    .summary {
-        float:left;
-    }
+
+$this->registerCss('
     .settings-container {
         float: right;
     }
 
-    #settings-button {
+    .settings-container .summary {
+        float:left;
+    }
+
+    .settings-container .settings-button {
         font-size: 24px;
         margin-bottom: 5px;
         color: black;
         cursor: pointer;
     }
 
-    #settings {
+    .settings-container .settings {
         position: fixed;
         display: none;
         background-color: #fff;
@@ -30,20 +31,20 @@ $this->registerCss("
         width: 450px;
     }
 
-    #settings label {
+    .settings-container .settings label {
         width: 50%;
         float:left;
     }
-");
+');
 ?>
-<div class="settings-container">
-    <span id="settings-button" class="glyphicon glyphicon-menu-hamburger" ></span>
-    <div class="panel panel-default" id="settings">
-        <div class="panel-heading">
+<div class="settings-container" id="<?= $widget->id ?>">
+    <span class="settings-button fa fa-bars" id="settings-button"></span>
+    <div class="settings card" id="settings">
+        <div class="card-header">
             Настройки:
-            <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close"><span aria-hidden="true">&times;</span></button>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <div class="columns-setting">
                 <div class="alert alert-warning" role="alert">
                     Можно выбрать не более <?= $widget->maxColumnsCount ?> колонок
@@ -52,7 +53,7 @@ $this->registerCss("
                 /** @var \consultnn\grid\plugins\Settings $widget */
                 echo Html::beginForm($widget->url);
                 echo Html::hiddenInput('storage_id', $widget->storageId);
-                echo Html::checkboxList("settings[columns]", $widget->activeColumns, $widget->columnLabels);
+                echo Html::checkboxList('settings[columns]', $widget->activeColumns, $widget->columnLabels);
                 echo Html::submitButton('Сохранить', ['class' => 'btn btn-primary pull-right', 'id' => 'save-columns']);
                 echo Html::endForm();
                 ?>
@@ -60,4 +61,4 @@ $this->registerCss("
         </div>
     </div>
 </div>
-<div class="clearfix"></div>
+<div class="clear"></div>

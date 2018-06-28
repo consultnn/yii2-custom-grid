@@ -47,7 +47,7 @@ class Settings extends AbstractPlugin
     public function init()
     {
         if (empty($this->storageId)) {
-            $this->storageId = $this->id.'-settings';
+            $this->storageId = $this->id . '-settings';
         }
 
         $this->grid->pluginSections['{settings}'] = $this;
@@ -123,14 +123,14 @@ class Settings extends AbstractPlugin
     {
         $view = $this->getView();
 
-        $js = "$('#{$this->id} #settings-button').on('click', function(event){
-            $('#settings').toggle();
+        $js = "$('#{$this->id} .settings-button').on('click', function(event){
+            $('#{$this->id} .settings').toggle(true);
             event.preventDefault();
             setMaxColumns();
         });
 
         $('#{$this->id} .close').on('click', function() {
-            $('#settings').toggle()
+            $('#{$this->id} .settings').toggle(false)
         });
 
         var checkboxSelector = '#{$this->id} .columns-setting input[type = checkbox]';
