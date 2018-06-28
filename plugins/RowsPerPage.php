@@ -44,7 +44,7 @@ class RowsPerPage extends AbstractPlugin
     public function init()
     {
         if (!$this->viewFile) {
-            $this->viewFile = 'rows_per_page.php';
+            $this->viewFile = 'rows_per_page';
         }
 
         if (empty($this->storageId)) {
