@@ -34,7 +34,7 @@ class Settings extends AbstractPlugin
     /**
      * @var string[]
      */
-    public $activeColumns = [];
+    public $activeColumns;
 
     /**
      * @var string
@@ -100,10 +100,14 @@ class Settings extends AbstractPlugin
                 if (!empty($id) && !empty($label)) {
                     $this->columnLabels[$id] = $label;
 
-                    if (!in_array($id, $this->activeColumns)) {
+                    if (is_array($this->activeColumns) && !in_array($id, $this->activeColumns)) {
                         unset($this->grid->columns[$key]);
                     }
                 }
+            }
+
+            if (!is_array($this->activeColumns)) {
+                $this->activeColumns = array_keys($this->columnLabels);
             }
         }
     }
