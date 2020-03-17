@@ -37,7 +37,7 @@ class Settings extends AbstractPlugin
     public $activeColumns;
 
     /** @var string[] */
-    public $forceColumns;
+    public $forceColumns = [];
     /**
      * @var string
      */
@@ -66,7 +66,6 @@ class Settings extends AbstractPlugin
             if (isset($settings['columns'])) {
                 $this->activeColumns = $settings['columns'];
             }
-            $this->activeColumns = array_merge($this->activeColumns, $this->forceColumns ?: []);
         }
     }
 
@@ -103,7 +102,10 @@ class Settings extends AbstractPlugin
                 if (!empty($id) && !empty($label)) {
                     $this->columnLabels[$id] = $label;
 
-                    if (is_array($this->activeColumns) && !in_array($id, $this->activeColumns)) {
+                    if (is_array($this->activeColumns)
+                        && !in_array($id, $this->activeColumns)
+                        && !in_array($id, $this->forceColumns)
+                    ) {
                         unset($this->grid->columns[$key]);
                     }
                 }
@@ -111,6 +113,10 @@ class Settings extends AbstractPlugin
 
             if (!is_array($this->activeColumns)) {
                 $this->activeColumns = array_keys($this->columnLabels);
+            }
+
+            if ($this->forceColumns) {
+                $this->activeColumns = array_merge($this->activeColumns, $this->forceColumns);
             }
         }
     }
