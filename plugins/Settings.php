@@ -36,6 +36,8 @@ class Settings extends AbstractPlugin
      */
     public $activeColumns;
 
+    /** @var string[] */
+    public $forceColumns;
     /**
      * @var string
      */
@@ -64,6 +66,7 @@ class Settings extends AbstractPlugin
             if (isset($settings['columns'])) {
                 $this->activeColumns = $settings['columns'];
             }
+            $this->activeColumns = array_merge($this->activeColumns, $this->forceColumns ?: []);
         }
     }
 
